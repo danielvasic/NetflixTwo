@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,12 +16,22 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
 import ba.sum.fpmoz.netflixtwo.R;
-public class MovieAdapter extends FirebaseRecyclerAdapter<Movie, MovieAdapter.MovieViewHolder> {
 
+
+
+public class MovieAdapter extends FirebaseRecyclerAdapter<Movie, MovieAdapter.MovieViewHolder> {
+    public interface OnRatingChangedListener {
+        void onRatingChanged(String movieId, float rating);
+    }
+
+
+    OnRatingChangedListener ratingChangedListener;
     Context ctx;
 
-    public MovieAdapter(@NonNull FirebaseRecyclerOptions<Movie> options) {
+    public MovieAdapter(@NonNull FirebaseRecyclerOptions<Movie> options, OnRatingChangedListener listener) {
         super(options);
+        this.ratingChangedListener = listener;
+
     }
 
     @Override
@@ -30,6 +41,7 @@ public class MovieAdapter extends FirebaseRecyclerAdapter<Movie, MovieAdapter.Mo
         holder.movieItemYear.setText(model.year.toString());
         holder.movieItemGenere.setText(model.genere);
         Picasso.get().load(model.image).into(holder.movieItemImageView);
+        holder.movieRatingBar.setRating(model.getAverageRating());
     }
 
     @NonNull
@@ -43,6 +55,9 @@ public class MovieAdapter extends FirebaseRecyclerAdapter<Movie, MovieAdapter.Mo
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         ImageView movieItemImageView;
         TextView movieItemName, movieItemDirector, movieItemYear, movieItemGenere;
+
+        RatingBar movieRatingBar;
+
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             this.movieItemImageView = itemView.findViewById(R.id.movieItemImageView);
@@ -50,6 +65,18 @@ public class MovieAdapter extends FirebaseRecyclerAdapter<Movie, MovieAdapter.Mo
             this.movieItemDirector = itemView.findViewById(R.id.movieItemDirector);
             this.movieItemGenere = itemView.findViewById(R.id.movieItemGenere);
             this.movieItemYear = itemView.findViewById(R.id.movieItemYear);
+            this.movieRatingBar = itemView.findViewById(R.id.movieItemRating);
+
+            movieRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    if (fromUser) {
+                        String movieId = getRef(getAdapterPosition()).getKey();
+                        ratingChangedListener.onRatingChanged(movieId, rating);
+                    }
+                }
+            });
+
         }
     }
 }

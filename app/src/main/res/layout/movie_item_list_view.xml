@@ -11,38 +11,62 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/movieItemImageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/ic_launcher_background"
+            android:elevation="4dp"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/movieItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
-            android:text="TextView"
-            android:textSize="30sp" />
+            android:text="Movie Title"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:drawableLeft="@drawable/ic_movie_black_24dp"
+            android:drawablePadding="8dp"
+            android:elevation="2dp" />
+
+        <RatingBar
+            android:id="@+id/movieItemRating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="4.5"
+            android:stepSize="0.5" />
 
         <TextView
             android:id="@+id/movieItemDirector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Director Name"
+            android:drawableLeft="@drawable/ic_director_chair"
+            android:drawablePadding="8dp" />
 
         <TextView
             android:id="@+id/movieItemGenere"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Genre"
+            android:drawableLeft="@drawable/ic_genre"
+            android:drawablePadding="8dp" />
 
         <TextView
             android:id="@+id/movieItemYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Release Year"
+            android:drawableLeft="@drawable/ic_calendar"
+            android:drawablePadding="8dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,32 +10,33 @@
         android:id="@+id/editTextMovieName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Movie Name" />
+        android:hint="Naslov filma" />
 
     <EditText
         android:id="@+id/editTextGenre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Genre" />
+        android:hint="Žanr" />
 
     <EditText
         android:id="@+id/editTextYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Year"
+        android:hint="Godina"
         android:inputType="number" />
 
     <EditText
         android:id="@+id/editTextDirector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Director" />
+        android:hint="Režiser" />
 
-    <EditText
-        android:id="@+id/editTextImageUrl"
+    <!-- Button to select image from gallery -->
+    <Button
+        android:id="@+id/buttonSelectImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Image URL" />
+        android:text="Select Image" />
 
     <Button
         android:id="@+id/buttonInsertMovie"
