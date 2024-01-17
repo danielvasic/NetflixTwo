@@ -30,14 +30,14 @@ import ba.sum.fpmoz.netflixtwo.R;
 
 public class MovieFragment extends Fragment implements MovieAdapter.OnRatingChangedListener {
 
-    FirebaseDatabase movieDatabase = FirebaseDatabase.getInstance();
+    FirebaseDatabase movieDatabase;
     MovieAdapter movieAdapter;
     RecyclerView movieRecyclerView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.activity_movie, container, false);
-
+        this.movieDatabase = FirebaseDatabase.getInstance();
         this.movieRecyclerView = view.findViewById(R.id.movieListView);
         this.movieRecyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext())
